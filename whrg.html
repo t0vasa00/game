@@ -37,36 +37,7 @@
             var level = 1;
 
 
-            class Ball{
-                constructor(startx, starty, speedx, speedy) {
-                    this.x = startx;
-                    this.y = starty;
-                    this.speedy = speedy;
-                    this.speedx = speedx;
-                }
-
-                update() {
-                    if((this.y >= canvas.height) || this.y <=0)  {
-                    this.speedy = -this.speedy;
-                }
-                    if((this.x >= canvas.width) || this.x <=0) {
-                    this.speedx = -this.speedx;
-                    }
-
-                this.y = this.y + this.speedy;
-                this.x = this.x + this.speedx;
-
-                }
-
-                draw() {
-                    context.beginPath();
-                    context.arc(this.x, this.y, 15, 0, 2 * Math.PI);
-                    context.fillStyle = "red";
-                    context.fill();
-
-                }
-
-            }
+            
 
             class Player {
                 constructor(x, y, movementspeedx, movementspeedy) {
@@ -135,6 +106,47 @@
                     context.stroke();
 
                 }
+            }
+
+            class Ball{
+                constructor(startx, starty, speedx, speedy) {
+                    this.x = startx;
+                    this.y = starty;
+                    this.speedy = speedy;
+                    this.speedx = speedx;
+                    this.width = 30;
+                    this.height = 30;
+                }
+
+                update() {
+                    if((this.y >= canvas.height) || this.y <=0)  {
+                    this.speedy = -this.speedy;
+                }
+                    if((this.x >= canvas.width) || this.x <=0) {
+                    this.speedx = -this.speedx;
+                    }
+
+                this.y = this.y + this.speedy;
+                this.x = this.x + this.speedx;
+
+                if(((this.x + this.width) > player.x) &&
+                (this.x < (player.x + player.width)) &&
+                ((this.y + this.height) > player.y) &&
+                (this.y < (player.y + player.height))) {
+                    location.reload();
+
+                }
+
+                }
+
+                draw() {
+                    context.beginPath();
+                    context.arc(this.x, this.y, 15, 0, 2 * Math.PI);
+                    context.fillStyle = "red";
+                    context.fill();
+
+                }
+
             }
 
 
